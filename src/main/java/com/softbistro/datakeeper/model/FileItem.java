@@ -13,6 +13,16 @@ public class FileItem {
 	
 	private List<List<DataItem>> dataItems;
 
+	public FileItem() {
+		
+	}
+	
+	public FileItem(String name, String extension, List<List<DataItem>> dataItems) {
+		this.name = name;
+		this.extension = extension;
+		this.dataItems = dataItems;
+	}
+	
 	public String getName() {
 		return name;
 	}

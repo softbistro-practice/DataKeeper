@@ -3,7 +3,7 @@ package com.softbistro.datakeeper.model;
 import java.util.List;
 
 /**
- * Represent a single file
+ * Represents a file with general info and it's content
  */
 public class FileItem {
 

@@ -3,24 +3,24 @@ package com.softbistro.datakeeper.model;
 import java.util.List;
 
 /**
- * Represent a single file
- */
++ * Represents a file with it's general info and content
++ */
 public class FileItem {
 
 	private String name;
 	
 	private String extension;
 	
-	private List<List<DataItem>> dataItems;
+	private FileContent content;
 
 	public FileItem() {
 		
 	}
 	
-	public FileItem(String name, String extension, List<List<DataItem>> dataItems) {
+	public FileItem(String name, String extension, FileContent content) {
 		this.name = name;
 		this.extension = extension;
-		this.dataItems = dataItems;
+		this.content = content;
 	}
 	
 	public String getName() {
@@ -39,14 +39,15 @@ public class FileItem {
 		this.extension = extension;
 	}
 
-	public List<List<DataItem>> getDataItems() {
-		return dataItems;
+
+	public FileContent getContent() {
+		return content;
 	}
 
-	public void setDataItems(List<List<DataItem>> dataItems) {
-		this.dataItems = dataItems;
+	public void setContent(FileContent content) {
+		this.content = content;
 	}
-	
+
 	@Override
 	public String toString() {
 		return new StringBuilder()
@@ -55,7 +56,7 @@ public class FileItem {
 				.append(", extension=")
 				.append(this.extension)
 				.append(", dataItems=")
-				.append(this.dataItems)
+				.append(this.content.toString())
 				.append("]")
 				.toString();
 	}

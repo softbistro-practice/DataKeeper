@@ -94,5 +94,21 @@ public class GoogleSheetsGlobal {
         
         return credential;
     }
+    
+    
+    /**
+     * @return HttpTransport
+     */
+    public static HttpTransport getHttpTransport() {
+    	return GoogleSheetsGlobal.HTTP_TRANSPORT;
+    }
+    
+    
+    /**
+     * @return JsonFactory
+     */
+    public static JsonFactory getJsonFactory() {
+    	return GoogleSheetsGlobal.JSON_FACTORY;
+    }
 
 }

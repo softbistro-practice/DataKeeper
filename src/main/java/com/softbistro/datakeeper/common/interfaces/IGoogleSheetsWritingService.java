@@ -19,5 +19,5 @@ public interface IGoogleSheetsWritingService {
 	 * @throws GeneralSecurityException 
 	 * @throws IOException 
 	 */
-	boolean writeSheet(List<List<DataItem>> data, String filename) throws IOException, GeneralSecurityException;
+	boolean writeSheet(List<List<Object>> data, String filename) throws IOException, GeneralSecurityException;
 }

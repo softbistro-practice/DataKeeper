@@ -2,7 +2,7 @@ package com.softbistro.datakeeper.model;
 
 import java.util.List;
 
- /**
+/**
  * Represents a file with it's general info and content
  */
 public class FileItem {

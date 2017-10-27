@@ -34,7 +34,7 @@ public class XLSFileContent extends FileContent {
 	public String toString() {
 		return new StringBuilder("XLSFileContent [")
 				.append("dateItems=")
-				.append(this.getDateItems().toString())
+				.append(this.getDataItems().toString())
 				.append("sheetNames=")
 				.append(this.sheetNames.toString())
 				.append("]")

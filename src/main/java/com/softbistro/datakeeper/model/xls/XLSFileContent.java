@@ -33,8 +33,8 @@ public class XLSFileContent extends FileContent {
 	@Override
 	public String toString() {
 		return new StringBuilder("XLSFileContent [")
-				.append("dateItems=")
-				.append(this.getDateItems().toString())
+				.append("dataItems=")
+				.append(this.getDataItems().toString())
 				.append("sheetNames=")
 				.append(this.sheetNames.toString())
 				.append("]")

@@ -8,5 +8,6 @@ public enum DataType {
 	Double,
 	String, 
 	Character,
+	Boolean,
 	Date;
 }

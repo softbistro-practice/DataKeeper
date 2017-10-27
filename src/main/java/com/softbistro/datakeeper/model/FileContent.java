@@ -7,31 +7,32 @@ import java.util.List;
  */
 public class FileContent {
 	
-	private List<List<DataItem>> dateItems;
+
+	private List<List<DataItem>> dataItems;
+
 
 	public FileContent() {
 	}
 
-	public FileContent(List<List<DataItem>> dateItems) {
-		this.dateItems = dateItems;
+	public FileContent(List<List<DataItem>> dataItems) {
+		this.dataItems = dataItems;
 	}
 
-	public List<List<DataItem>> getDateItems() {
-		return dateItems;
+	public List<List<DataItem>> getDataItems() {
+		return dataItems;
 	}
 
-	public void setDateItems(List<List<DataItem>> dateItems) {
-		this.dateItems = dateItems;
+	public void setDataItems(List<List<DataItem>> dataItems) {
+		this.dataItems = dataItems;
+
 	}
 
 	@Override
 	public String toString() {
-		return new StringBuilder("FileContent [dateItems=")
-				.append( dateItems.toString())
+		return new StringBuilder("FileContent [dataItems=")
+				.append( dataItems.toString())
 				.append("]")
 				.toString();
 	}
-	
-	
-	
+
 }

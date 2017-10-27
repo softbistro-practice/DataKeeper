@@ -7,7 +7,9 @@ import java.util.List;
  */
 public class FileContent {
 	
+
 	private List<List<DataItem>> dataItems;
+
 
 	public FileContent() {
 	}
@@ -22,6 +24,7 @@ public class FileContent {
 
 	public void setDataItems(List<List<DataItem>> dataItems) {
 		this.dataItems = dataItems;
+
 	}
 
 	@Override
@@ -31,5 +34,5 @@ public class FileContent {
 				.append("]")
 				.toString();
 	}
-	
+
 }

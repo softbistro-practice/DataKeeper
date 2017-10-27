@@ -4,12 +4,13 @@ import java.io.File;
 import java.util.List;
 
 import com.softbistro.datakeeper.model.DataItem;
+import com.softbistro.datakeeper.model.FileContent;
 
 /**
  * Basic interface for file parsers
  */
 public interface IFileParser {
 
-	public List<List <DataItem>> parse(File file);
+	public FileContent parse(File file);
 	
 }

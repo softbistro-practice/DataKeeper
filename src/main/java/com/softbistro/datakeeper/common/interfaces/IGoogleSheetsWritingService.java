@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
 
-import com.softbistro.datakeeper.model.DataItem;
 
 /**
  * 

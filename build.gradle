@@ -37,5 +37,6 @@ dependencies {
     compile 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
     compile 'com.google.apis:google-api-services-sheets:v4-rev487-1.23.0'
 	
+	testCompile('org.assertj:assertj-core:3.6.1')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

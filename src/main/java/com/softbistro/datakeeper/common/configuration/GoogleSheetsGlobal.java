@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
@@ -18,6 +19,7 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
+import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
 
 /**
@@ -29,7 +31,10 @@ import com.google.api.services.sheets.v4.SheetsScopes;
 public class GoogleSheetsGlobal {
 	
 	private static final Logger logger = Logger.getLogger(GoogleSheetsGlobal.class);
-
+	
+	/** Application name. */
+	private static String APPLICATION_NAME = "Data Keeper";
+	
 	/** Global instance of the JSON factory. */
 	private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 	
@@ -49,66 +54,55 @@ public class GoogleSheetsGlobal {
 	 * If modifying these scopes, delete your previously saved credentials
 	 * at ~/.credentials/sheets.googleapis.com-java-datakeeper
 	 */
-	private static final List<String> SCOPES = Arrays.asList(SheetsScopes.SPREADSHEETS);
-	
-	// Load client secrets.
-	private static final String CLIENT_SECRETS = "/client_secrets.json";
+	public static final List<String> SCOPES = Arrays.asList(SheetsScopes.SPREADSHEETS);
 	
 	
-	static {
-		try {
-			HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-			DATA_STORE_FACTORY = new FileDataStoreFactory(DATA_STORE_DIR);
-		} catch(Throwable t) {
-			logger.error(t);
-		}
-	}
-	
-	
-	private static InputStream getSecretFile() throws IOException {
-		return GoogleSheetsGlobal.class.getResourceAsStream(CLIENT_SECRETS);
-	}
-	
-	
-	/**
-     * Creates an authorized Credential object.
-     * 
-     * @return an authorized Credential object.
-     * @throws IOException
-     */
-    public static Credential authorize() throws IOException {
-    	
-        // Load client secrets.
-        InputStream clientSecretsReader = getSecretFile();
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets
-        		.load(GoogleSheetsGlobal.JSON_FACTORY, new InputStreamReader(clientSecretsReader));
+   static {
+       try {
+           HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+           DATA_STORE_FACTORY = new FileDataStoreFactory(DATA_STORE_DIR);
+       } catch (Throwable t) {
+           logger.error(t);
+       }
+   }
 
-        // Build flow and trigger user authorization request.
-        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-        		GoogleSheetsGlobal.HTTP_TRANSPORT, GoogleSheetsGlobal.JSON_FACTORY, clientSecrets, GoogleSheetsGlobal.SCOPES)
-                .setDataStoreFactory(GoogleSheetsGlobal.DATA_STORE_FACTORY)
-                .build();
-        
-        Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
-        System.out.println("Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
-        
-        return credential;
-    }
-    
-    
-    /**
-     * @return HttpTransport
-     */
-    public static HttpTransport getHttpTransport() {
-    	return GoogleSheetsGlobal.HTTP_TRANSPORT;
-    }
-    
-    
-    /**
-     * @return JsonFactory
-     */
-    public static JsonFactory getJsonFactory() {
-    	return GoogleSheetsGlobal.JSON_FACTORY;
-    }
+	
+	
+   /**
+    * Creates an authorized Credential object.
+    * @return an authorized Credential object.
+    * @throws IOException
+    */
+   public static Credential authorize() throws IOException {
+       // Load client secrets.
+       InputStream inputStream = GoogleSheetsGlobal.class.getResourceAsStream("/client_secret.json");
+       GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(inputStream));
+
+       // Build flow and trigger user authorization request.
+       GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow
+    		   .Builder(HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
+               .setDataStoreFactory(DATA_STORE_FACTORY)
+               .build();
+       
+       Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver())
+    		   .authorize("user");
+
+       return credential;
+   }
+
+
+   /**
+    * Build and return an authorized Sheets API client service.
+    * @return an authorized Sheets API client service
+    * @throws IOException
+    */
+   public static Sheets getSheetsService() throws IOException {
+       Credential credential = authorize();
+       
+       return new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
+               .setApplicationName(APPLICATION_NAME)
+               .build();
+   }
+
 
 }

@@ -38,28 +38,31 @@ public class GoogleSheetsWritingService implements IGoogleSheetsWritingService {
 
 		List<Sheet> listOfSheets = new ArrayList<>();
 		listOfSheets.add(new Sheet()
-					.setProperties(new SheetProperties()
-					.setTitle(sheetName)));
+				.setProperties(new SheetProperties()
+				.setTitle(sheetName)));
 		
 		Spreadsheet requestBody = new Spreadsheet()
-					.setProperties(new SpreadsheetProperties()
-					.setTitle(filename))
-					.setSheets(listOfSheets);
+				.setProperties(new SpreadsheetProperties()
+				.setTitle(filename))
+				.setSheets(listOfSheets);
 		
-		Sheets sheetService = GoogleSheetsGlobal.getSheetsService();
-		Sheets.Spreadsheets.Create request = sheetService.spreadsheets().create(requestBody);
+		Sheets sheetsService = GoogleSheetsGlobal.getSheetsService();
+		Sheets.Spreadsheets.Create request = sheetsService.spreadsheets().create(requestBody);
 		
-		Spreadsheet returnedSpreadsheet = request.execute();
+		Spreadsheet response = request.execute();		
+
+		ValueRange body = new ValueRange().setValues(data);
 		
-		ValueRange values = new ValueRange().setValues(data);
+		UpdateValuesResponse result = sheetsService
+				.spreadsheets()
+				.values()
+				.update(response.getSpreadsheetId(), sheetName, body)
+				.setValueInputOption("RAW")
+				.execute();
 		
-		UpdateValuesResponse valuesResponse = sheetService
-					.spreadsheets()
-					.values()
-					.update(returnedSpreadsheet.getSpreadsheetId(), sheetName, values)
-					.setValueInputOption("RAW")
-					.execute();
-			
+		if(result == null || result.isEmpty())
+			return false;
+		
 		return true;
 	}
 

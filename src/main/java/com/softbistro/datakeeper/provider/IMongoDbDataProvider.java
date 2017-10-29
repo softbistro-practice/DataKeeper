@@ -10,6 +10,6 @@ public interface IMongoDbDataProvider {
 	 * @param collectionName Name of data collection
 	 * @return List rows
 	 */
-	List<List<String>> getDataRows(String collectionName);
+	List<List<Object>> getDataRows(String collectionName);
 	
 }

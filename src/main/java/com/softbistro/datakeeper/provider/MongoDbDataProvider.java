@@ -15,15 +15,16 @@ public class MongoDbDataProvider implements IDataProvider {
 	private MongoTemplate mongoTemplate;
 
 	@Override
-	public List<List<String>> getDataRows() {
+	public List<List<String>> getDataRows(String collectionName) {
 		List<List<String>> result = new ArrayList<>();
-		for(String collectionName : this.mongoTemplate.getCollectionNames()) {
+		if(this.mongoTemplate.collectionExists(collectionName)) {
 			for(Document document : this.mongoTemplate.getCollection(collectionName).find()) {
 				result.add(this.toStringList(document));
 			}
+			return result;
 		}
 		
-		return result;
+		return null;
 	}
 	
 	private List<String> toStringList(Document document) {

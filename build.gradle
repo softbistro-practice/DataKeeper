@@ -27,9 +27,17 @@ repositories {
 	maven { url "https://repo.spring.io/milestone" }
 }
 
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
 	compile('org.springframework.boot:spring-boot-starter-web-services')
+	
+	compile 'com.google.api-client:google-api-client:1.23.0'
+    compile 'com.google.apis:google-api-services-sheets:v4-rev488-1.23.0'   
+    compile('com.google.oauth-client:google-oauth-client-jetty:1.23.0') {
+   		exclude group: 'org.mortbay.jetty', module: 'servlet-api'
+	}
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+
+

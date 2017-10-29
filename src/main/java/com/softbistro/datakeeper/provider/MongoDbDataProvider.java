@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MongoDbDataProvider implements IDataProvider {
+public class MongoDbDataProvider implements IMongoDbDataProvider {
 	
 	@Autowired
 	private MongoTemplate mongoTemplate;

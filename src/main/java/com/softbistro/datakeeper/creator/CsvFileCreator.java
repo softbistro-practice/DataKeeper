@@ -21,6 +21,7 @@ public class CsvFileCreator implements IFileCreator {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		try(Writer out = new BufferedWriter(new OutputStreamWriter(outputStream));) {
 			CSVPrinter csvPrinter = new CSVPrinter(out, CSVFormat.DEFAULT);
+			csvPrinter.printComment(tableName);
 			for(List<Object> row : dataRows) {
 				csvPrinter.printRecord(row);
 			}

@@ -23,7 +23,6 @@ public class MongoDbDataProvider implements IMongoDbDataProvider {
 			}
 			return result;
 		}
-		
 		return null;
 	}
 

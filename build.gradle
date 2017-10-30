@@ -32,6 +32,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web-services')
 	
 	compile 'org.apache.poi:poi-ooxml:3.17'
+	compile group: 'org.apache.commons', name: 'commons-csv', version: '1.4'
+
 	
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

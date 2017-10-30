@@ -1,9 +1,11 @@
 package com.softbistro.datakeeper.creator;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 import javax.activation.UnsupportedDataTypeException;
@@ -23,7 +25,7 @@ public class XlsFileCreator implements IFileCreator {
 	private static final Logger logger = Logger.getLogger(XlsFileCreator.class);
 	
 	@Override
-	public boolean writeTableDataRows(String tableName, List<List<Object>> dataRows, String filePath) {
+	public ByteArrayOutputStream writeTableDataRows(String tableName, List<List<Object>> dataRows, String filePath) {
 		
 		try {
 			XSSFWorkbook workbook = workbookInit(filePath);
@@ -31,10 +33,10 @@ public class XlsFileCreator implements IFileCreator {
 			
 			writeRows(dataRows, sheet);
 			
-			FileOutputStream outputStream = new FileOutputStream(filePath);
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 			workbook.write(outputStream);
 			
-			return true;
+			return outputStream;
 			
 		} catch (Exception e) {
 			logger.error(e.getMessage());

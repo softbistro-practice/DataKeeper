@@ -1,9 +1,10 @@
 package com.softbistro.datakeeper.creator;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public interface IFileCreator {
 
-	boolean writeTableDataRows(String tableName, List<List<Object>> dataRows, String fileName);
+	ByteArrayOutputStream writeTableDataRows(String tableName, List<List<Object>> dataRows, String fileName);
 	
 }

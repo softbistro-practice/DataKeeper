@@ -10,7 +10,12 @@ import com.softbistro.datakeeper.model.FileContent;
  * Basic interface for file parsers
  */
 public interface IFileParser {
-
+	
+	/**
+	 *  Pulling data from file and parsing it
+	 *  @param input file
+	 * 	@return {@link FileContent} object that holds file content
+	 */
 	public FileContent parse(File file);
 	
 }

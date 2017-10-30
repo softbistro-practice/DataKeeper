@@ -23,7 +23,7 @@ public class CsvFileCreator implements IFileCreator {
 			CSVPrinter csvPrinter = new CSVPrinter(out, CSVFormat.DEFAULT);
 			csvPrinter.printComment(tableName);
 			for(List<Object> row : dataRows) {
-				csvPrinter.printRecord(row);
+				csvPrinter.printRecords(row);
 			}
 			csvPrinter.flush();
 			csvPrinter.close();
